@@ -1,0 +1,83 @@
+# VSCode folders
+.vscode/
+
+# Python-specific files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyCharm files
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Virtual environment
+venv/
+venv*/
+*.venv/
+.env/
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Dependency folders
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+eggs/
+
+# Distribution folders
+bin/
+build/
+develop-eggs/
+#dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Docker Compose
+docker-compose.yml
+docker-compose.override.yml
+docker-compose.prod.yml
+docker-compose.override.prod.yml
+
+# .vscode settings
+.vscode/settings.json
+
+# Pipenv
+Pipfile
+Pipfile.lock
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+#else
+pylog/
