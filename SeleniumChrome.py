@@ -43,6 +43,8 @@ class SeleniumChrome:
                     max(file, key=lambda x: int(x["Issue"]))["Issue"])
             self.get_data()
             self.weite_file.write_data(self.lottery_data_list)
+            self.log.write_log("更新" + str(len(self.lottery_data_list)) + "筆")
+            print("更新" + str(len(self.lottery_data_list)) + "筆")
             self.log.write_log("爬蟲完成!")
             print("爬蟲完成!")
         except Exception as ex:
