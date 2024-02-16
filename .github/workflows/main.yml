@@ -42,7 +42,8 @@ jobs:
       with:
         tag_name: AutoLottery539
         release_name: Release AutoLottery539
-        override : true
+        draft: false
+        prerelease: false
       
     - name: Upload Release Asset
       id: upload-release-asset
