@@ -61,6 +61,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.get_version.outputs.tag_name }}
-        RELEASE_NAME: "Release $(< version.txt)"
+        RELEASE_NAME: "Release ${{ steps.get_version.outputs.tag_name }}"
         draft: false
         prerelease: false
