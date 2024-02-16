@@ -50,13 +50,17 @@ jobs:
     - name: 显示版本号
       run: echo v$(< version.txt)
     
+    - name: 获取版本号
+      id: get_version
+      run: echo ::set-output name=tag_name::$(< version.txt)
+    
     - name: 發布 Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v$(< version.txt)
+        tag_name: ${{ steps.get_version.outputs.tag_name }}
         RELEASE_NAME: "Release $(< version.txt)"
         draft: false
         prerelease: false
