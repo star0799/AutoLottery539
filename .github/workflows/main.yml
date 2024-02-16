@@ -52,14 +52,7 @@ jobs:
         tag_name: ${{ steps.read_version.outputs.version }}
         release_name: Release ${{ steps.read_version.outputs.version }}
         draft: false
-        prerelease: false
-      
-    - name: Upload to Release
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: publish/
-        asset_name: AutoLottery539-${{ steps.read_version.outputs.version }}.zip
+        prerelease: false      
 
     - name: Upload Release Asset
       id: upload-release-asset
