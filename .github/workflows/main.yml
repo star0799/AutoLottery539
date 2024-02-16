@@ -30,6 +30,10 @@ jobs:
     - name: Generate version number
       run: echo $(date +'%Y%m%d%H%M%S') > version.txt
 
+    - name: Read version from version.txt
+      id: read_version
+      run: echo "::set-output name=version::$(cat version.txt)"
+
     - name: Create publish directory
       run: mkdir publish
 
@@ -45,8 +49,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: AutoLottery539
-        release_name: Release AutoLottery539
+        tag_name: ${{ steps.read_version.outputs.version }}
+        release_name: Release ${{ steps.read_version.outputs.version }}
         draft: false
         prerelease: false
       
@@ -55,4 +59,4 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: publish/
-        asset_name: AutoLottery539-${{ steps.generate_version.outputs.version }}.zip
+        asset_name: AutoLottery539-${{ steps.read_version.outputs.version }}.zip
