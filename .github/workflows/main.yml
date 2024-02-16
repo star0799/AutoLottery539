@@ -51,10 +51,12 @@ jobs:
       run: echo v$(< version.txt)
     
     - name: 發布 Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: output.zip
+      id: create_release
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
         tag_name: v$(< version.txt)
         RELEASE_NAME: "Release $(< version.txt)"
+        draft: false
+        prerelease: false
