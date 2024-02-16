@@ -47,6 +47,9 @@ jobs:
       run: |
         zip -r output.zip publish/
 
+    - name: 显示版本号
+      run: echo v$(< version.txt)
+    
     - name: 發布 Release
       uses: softprops/action-gh-release@v1
       with:
