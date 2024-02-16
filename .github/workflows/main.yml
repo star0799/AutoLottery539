@@ -25,13 +25,8 @@ jobs:
 
     - name: 更新版本號
       run: |
-        if [ ! -f version.txt ]; then
-          echo "1.0.0" > version.txt
-        else
-          current_version=$(<version.txt)
-          new_version=$(echo $current_version | awk -F. '{$NF+=1; OFS="."; print $0}')
-          echo $new_version > version.txt
-        fi
+        date_string=$(date +'%Y%m%d%H%M%S')
+        echo $date_string > version.txt
 
     - name: 創建發布目錄
       run: |
