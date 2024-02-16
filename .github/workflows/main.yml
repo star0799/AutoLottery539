@@ -47,12 +47,6 @@ jobs:
       run: |
         zip -r output.zip publish/
 
-    - name: 創建標籤
-      run: git tag -a v$(< version.txt) -m "Release version $(< version.txt)"
-      
-    - name: 推送標籤到 GitHub
-      run: git push origin --tags
-
     - name: 發布 Release
       uses: softprops/action-gh-release@v1
       with:
