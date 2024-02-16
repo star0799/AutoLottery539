@@ -46,6 +46,9 @@ jobs:
         cp config.ini publish/config.ini
         cp version.txt publish/version.txt
 
+    - name: Zip publish directory
+      run: zip -r output.zip publish
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
