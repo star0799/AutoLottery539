@@ -30,6 +30,12 @@ jobs:
     - name: Generate version number
       run: echo $(date +'%Y%m%d%H%M%S') > version.txt
 
+    - name: Read version
+      id: read_version
+      run: |
+          cat version.txt
+          echo "::set-output name=version::$(cat version.txt)"
+
     - name: Create publish directory
       run: mkdir publish
 
@@ -41,13 +47,6 @@ jobs:
 
     - name: Zip publish directory
       run: zip -r output.zip publish
-
-    - name: Read version
-      id: read_version
-      run: |
-          unzip output.zip -d extracted
-          cat extracted/publish/version.txt
-          echo "::set-output name=version::$(cat extracted/publish/version.txt)"
 
     - name: Create Release
       id: create_release
