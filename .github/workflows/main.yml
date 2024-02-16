@@ -33,24 +33,3 @@ jobs:
       with:
         name: AutoLottery539.exe
         path: dist/AutoLottery539.exe
-
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        release_name: Release AutoLottery539
-        draft: false
-        prerelease: false
-      
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/AutoLottery539.exe
-        asset_name: AutoLottery539.exe
-        asset_content_type: application/octet-stream
