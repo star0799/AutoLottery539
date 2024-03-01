@@ -7,6 +7,7 @@ from log import Log
 import sys
 from ReadFile import ReadFile
 from SeleniumChrome import SeleniumChrome
+import configparser
 
 
 def update_chrome_driver():
@@ -64,7 +65,11 @@ def get_url_to_download(version):
         raise requests.exceptions.RequestException(
             f"Unable to get version path from website: {response.status_code}")
 
-    return f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{response.text}/win64/chromedriver-win64.zip"
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    downloadUrl = config['Settings']['ChromeDownloadUrl']
+    downloadFile = config['Settings']['ChromeDownloadFile']
+    return downloadUrl+response.text+downloadFile
 
 
 def kill_all_chromedriver_processes():
