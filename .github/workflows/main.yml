@@ -31,7 +31,7 @@ jobs:
     - name: 构建应用程序并复制到发布目录
       run: |
         mkdir -p publish
-        pyinstaller --distpath=publish --debug AutoLottery539.spec
+        pyinstaller --distpath=publish --debug=all AutoLottery539.spec
 
     - name: 将配置文件复制到发布目录
       run: |
