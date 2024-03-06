@@ -40,6 +40,9 @@ jobs:
     - name: 将版本文件复制到发布目录
       run: |
         cp AutoLottery539_version.txt publish/
+        
+    - name: 设置执行权限
+      run: chmod +x publish/AutoLottery539.exe
 
     - name: 將發布目錄壓縮
       run: |
