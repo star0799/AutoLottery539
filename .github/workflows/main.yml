@@ -29,7 +29,7 @@ jobs:
         echo $date_string > AutoLottery539_version.txt
 
     - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
+      uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
         path: .
         spec: path/to/AutoLottery539.spec   # Update this with the path to your AutoLottery539.spec file
