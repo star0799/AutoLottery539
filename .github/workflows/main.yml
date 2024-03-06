@@ -28,20 +28,22 @@ jobs:
         date_string=$(date +'%Y%m%d%H%M%S')
         echo $date_string > AutoLottery539_version.txt
 
-    - name: Install dependencies
-      run: pip install pyinstaller
-      
-    - name: upgrade pyinstaller
-      run: pip install --upgrade pyinstaller
-      
-    - name: Build exe
-      run: pyinstaller --arch x64 AutoLottery539.spec
+    - name: Package Application
+      uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: .
+        spec: path/to/AutoLottery539.spec   # Update this with the path to your AutoLottery539.spec file
 
     - name: Create publish directory
       run: mkdir -p publish
 
     - name: Move exe to publish directory
-      run: mv dist/AutoLottery539.exe publish/
+      run: mv dist/windows/AutoLottery539.exe publish/
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: name-of-artifact
+        path: publish/
 
     - name: 将配置文件复制到发布目录
       run: |
