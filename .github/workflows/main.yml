@@ -31,6 +31,9 @@ jobs:
     - name: 創建發布目錄
       run: |
         mkdir publish
+    
+    - name: 构建应用程序
+      run: pyinstaller AutoLottery539.spec
 
     - name: 複製檔案到發布目錄
       run: |
