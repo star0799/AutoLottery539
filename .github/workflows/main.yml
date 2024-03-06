@@ -32,7 +32,7 @@ jobs:
       run: pip install pyinstaller
 
     - name: Build exe
-      run: pyinstaller AutoLottery539.spec
+      run: pyinstaller --arch x64 AutoLottery539.spec
 
     - name: Create publish directory
       run: mkdir -p publish
