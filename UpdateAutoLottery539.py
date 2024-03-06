@@ -3,6 +3,7 @@ import os
 import requests
 import shutil
 import zipfile
+from log import Log
 
 
 class UpdateAutoLottery539:
@@ -20,6 +21,7 @@ class UpdateAutoLottery539:
             url = release['assets'][0]['browser_download_url']
             print("Current version:", local_version,
                   ", New version:", release['tag_name'])
+            Log().write_log("新版本"+release['tag_name'])
             return True, url
         else:
             return False, ''

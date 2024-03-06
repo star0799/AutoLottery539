@@ -59,7 +59,7 @@ def get_web_chrome_version():
 def get_url_to_download(version):
     if not version:
         raise ValueError("Unable to get url because version is empty")
-    url_to_path_location = f"https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_{
+    url_to_path_location = config['Github']['ChromeLatestReleaseUrl']+f"{
         '.'.join(version.split('.')[:3])}"
     response = requests.get(url_to_path_location)
     if not response.ok:
@@ -132,6 +132,7 @@ def schedule_commands(temp_file_path, file_path):
 
 if __name__ == "__main__":
     try:
+        Log().write_log("更新應用程式")
         filePath = os.getcwd()
         # 要異動的檔案列表
         moveFiles = ["AutoLottery539_version.txt",
@@ -157,8 +158,10 @@ if __name__ == "__main__":
             # 在一段延迟后执行命令
             temp_exe_path = os.path.join(temp_dir, 'AutoLottery539_temp.exe')
             schedule_commands(temp_exe_path, filePath)
+            Log().write_log("更新成功")
 
     except Exception as ex:
+        Log().write_log("更新應用程式失敗")
         Log().write_log(str(ex))
 
     update_chrome_driver()
