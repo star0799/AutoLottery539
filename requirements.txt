@@ -3,7 +3,7 @@ attrs==23.1.0
 autopep8==2.0.4
 beautifulsoup4==4.12.2
 certifi==2023.11.17
-cffi==1.15.0
+cffi==1.16.0
 charset-normalizer==3.3.2
 distlib==0.3.8
 filelock==3.13.1
