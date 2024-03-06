@@ -28,18 +28,10 @@ jobs:
         date_string=$(date +'%Y%m%d%H%M%S')
         echo $date_string > AutoLottery539_version.txt
 
-    - name: 創建發布目錄
+    - name: 构建应用程序并复制到发布目录
       run: |
-        mkdir publish
-    
-    - name: 构建应用程序
-      run: pyinstaller AutoLottery539.spec
-
-    - name: 複製檔案到發布目錄
-      run: |
-        cp dist/AutoLottery539.exe publish/
-        cp config.ini publish/
-        cp AutoLottery539_version.txt publish/
+        mkdir -p publish
+        pyinstaller --distpath=publish AutoLottery539.spec
 
     - name: 將發布目錄壓縮
       run: |
