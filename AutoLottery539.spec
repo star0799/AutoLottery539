@@ -28,7 +28,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='AutoLottery539',
+    name='AutoLottery539.exe',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
