@@ -27,11 +27,11 @@ def update_chrome_driver():
             download_new_version_of_chrome(url_to_download, chrome_driver_path)
             extract_zip(chrome_driver_path)
             move_chrome_driver(chrome_driver_path)
-            Log().write_log("下載新版本Url:"+url_to_download+"完成")
+            Log().write_log("ChromeDriver下載新版本Url:"+url_to_download+"完成")
         except Exception as ex:
             Log().write_log("更新ChromeDriver失敗，原因:"+str(ex))
     else:
-        Log().write_log("無須更新")
+        Log().write_log("ChromeDriver無須更新")
     print("更新ChromeDriver結束")
     Log().write_log("更新ChromeDriver結束")
 
@@ -132,7 +132,7 @@ def schedule_commands(temp_file_path, file_path):
 
 if __name__ == "__main__":
     try:
-        Log().write_log("更新應用程式")
+        Log().write_log("更新應用程式開始...")
         filePath = os.getcwd()
         # 要異動的檔案列表
         moveFiles = ["AutoLottery539_version.txt",
@@ -158,10 +158,10 @@ if __name__ == "__main__":
             # 在一段延迟后执行命令
             temp_exe_path = os.path.join(temp_dir, 'AutoLottery539_temp.exe')
             schedule_commands(temp_exe_path, filePath)
-            Log().write_log("更新成功")
+            Log().write_log("更新應用程式成功!")
 
     except Exception as ex:
-        Log().write_log("更新應用程式失敗")
+        Log().write_log("更新應用程式失敗!")
         Log().write_log(str(ex))
 
     update_chrome_driver()

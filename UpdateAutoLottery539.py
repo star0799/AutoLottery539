@@ -16,12 +16,13 @@ class UpdateAutoLottery539:
         local_version = self.read_version()
 
         release = self.get_latest_release()
-
+        Log().write_log("當前版本:"+local_version)
+        Log().write_log("新版本:"+release['tag_name'])
         if release is not None and self.is_new_version(release['tag_name'].strip(), local_version.strip()):
             url = release['assets'][0]['browser_download_url']
             print("Current version:", local_version,
                   ", New version:", release['tag_name'])
-            Log().write_log("新版本"+release['tag_name'])
+            Log().write_log("版本更新至:"+release['tag_name'])
             return True, url
         else:
             return False, ''
