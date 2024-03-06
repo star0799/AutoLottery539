@@ -26,7 +26,7 @@ jobs:
     - name: 更新版本號
       run: |
         date_string=$(date +'%Y%m%d%H%M%S')
-        echo $date_string > version.txt
+        echo $date_string > AutoLottery539_version.txt
 
     - name: 創建發布目錄
       run: |
@@ -36,18 +36,18 @@ jobs:
       run: |
         cp dist/AutoLottery539.exe publish/
         cp config.ini publish/
-        cp version.txt publish/
+        cp AutoLottery539_version.txt publish/
 
     - name: 將發布目錄壓縮
       run: |
         zip -r output.zip publish/
 
     - name: 显示版本号
-      run: echo v$(< version.txt)
+      run: echo v$(< AutoLottery539_version.txt)
     
     - name: 获取版本号
       id: get_version
-      run: echo ::set-output name=tag_name::$(< version.txt)
+      run: echo ::set-output name=tag_name::$(< AutoLottery539_version.txt)
     
     - name: 發布 Release
       id: create_release
@@ -71,8 +71,8 @@ jobs:
         asset_name: AutoLottery539-${{ steps.get_version.outputs.tag_name }}.zip
         asset_content_type: application/zip
         
-    - name: Upload version.txt as artifact
+    - name: Upload AutoLottery539_version.txt as artifact
       uses: actions/upload-artifact@v2
       with:
           name: version-info
-          path: .\publish\version.txt 
+          path: .\publish\AutoLottery539_version.txt 

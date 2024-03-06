@@ -7,7 +7,10 @@ from log import Log
 import sys
 from ReadFile import ReadFile
 from SeleniumChrome import SeleniumChrome
+from UpdateAutoLottery539 import UpdateAutoLottery539
 import configparser
+import tempfile
+import subprocess
 
 
 def update_chrome_driver():
@@ -117,6 +120,46 @@ def move_chrome_driver(chrome_driver_path):
                                "chromedriver-win64"), ignore_errors=True)
 
 
+def schedule_commands(temp_file_path, file_path):
+    # 在延迟后执行命令
+    subprocess.Popen(
+        ["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 & Del", temp_file_path])
+
+    # 启动新版本程序
+    subprocess.Popen(["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 &",
+                     os.path.join(file_path, "Lottery539.exe")])
+
+
 if __name__ == "__main__":
+    try:
+        filePath = os.getcwd()
+        # 要異動的檔案列表
+        moveFiles = ["AutoLottery539_version.txt",
+                     "AutoLottery539.exe", "config.ini"]
+        updater = UpdateAutoLottery539()
+        update_available, download_url = updater.is_update()
+        if update_available:
+            # 创建临时目录
+            temp_dir = tempfile.mkdtemp()
+
+            # 将原始目录中的指定檔案移动到临时目录
+            for file_to_move in moveFiles:
+                if os.path.isfile(file_to_move):
+                    temp_file_path = os.path.join(temp_dir, file_to_move)
+                    shutil.move(file_to_move, temp_file_path)
+
+            # 下载并更新文件
+            updater.download_file(download_url, '.')
+
+            # 移动并替换文件
+            updater.move_and_replace_files()
+
+            # 在一段延迟后执行命令
+            temp_exe_path = os.path.join(temp_dir, 'AutoLottery539_temp.exe')
+            schedule_commands(temp_exe_path, filePath)
+
+    except Exception as ex:
+        Log().write_log(str(ex))
+
     update_chrome_driver()
     SeleniumChrome().load_data()
