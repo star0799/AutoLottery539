@@ -30,7 +30,10 @@ jobs:
 
     - name: Install dependencies
       run: pip install pyinstaller
-
+      
+    - name: upgrade pyinstaller
+      run: pip install --upgrade pyinstaller
+      
     - name: Build exe
       run: pyinstaller --arch x64 AutoLottery539.spec
 
