@@ -33,6 +33,14 @@ jobs:
         mkdir -p publish
         pyinstaller --distpath=publish AutoLottery539.spec
 
+    - name: 将配置文件复制到发布目录
+      run: |
+        cp config.ini publish/
+
+    - name: 将版本文件复制到发布目录
+      run: |
+        cp AutoLottery539_version.txt publish/
+
     - name: 將發布目錄壓縮
       run: |
         zip -r output.zip publish/
