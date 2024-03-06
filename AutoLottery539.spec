@@ -11,6 +11,7 @@ a = Analysis(
         ('LotteryData.py', '.'),
         ('SeleniumChrome.py', '.'),
         ('WriteFile.py', '.'),
+		('UpdateAutoLottery539.py', '.'),
     ],
     hiddenimports=['selenium','selenium.webdriver.common.by','selenium.webdriver.common.keys','selenium.webdriver.common.action_chains','selenium.webdriver.support.ui','selenium.webdriver.support','selenium.webdriver.support.ui','selenium.webdriver.support.expected_conditions','configparser'],
     hookspath=[],
