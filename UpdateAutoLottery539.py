@@ -4,6 +4,7 @@ import requests
 import shutil
 import zipfile
 from log import Log
+import sys
 
 
 class UpdateAutoLottery539:
@@ -64,10 +65,12 @@ class UpdateAutoLottery539:
         os.remove(file_path)
 
     def move_and_replace_files(self):
-        Log().write_log(self.path)
+        Log().write_log(os.path.dirname(os.path.abspath(sys.argv[0])))
         source_directory = os.path.join(os.path.dirname(__file__), "publish")
         destination_directory = os.path.dirname(__file__)
-
+        Log().write_log("__file__"+__file__)
+        Log().write_log(source_directory)
+        Log().write_log(destination_directory)
         if os.path.exists(source_directory):
             for file_name in os.listdir(source_directory):
                 source_path = os.path.join(source_directory, file_name)
