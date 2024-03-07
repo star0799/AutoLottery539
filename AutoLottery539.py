@@ -125,7 +125,6 @@ def schedule_commands(temp_file_path, file_path):
     # 在延迟后执行命令
     subprocess.Popen(
         ["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 & Del", temp_file_path])
-    time.sleep(2)
     # 启动新版本程序
     subprocess.Popen(["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 &",
                       os.path.join(file_path, "AutoLottery539.exe")])
@@ -160,6 +159,7 @@ if __name__ == "__main__":
             temp_exe_path = os.path.join(temp_dir, 'AutoLottery539.exe')
             schedule_commands(temp_exe_path, filePath)
             Log().write_log("更新應用程式成功!")
+            sys.exit()
 
     except Exception as ex:
         Log().write_log("更新應用程式失敗!")
