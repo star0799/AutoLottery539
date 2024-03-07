@@ -57,8 +57,11 @@ def get_web_chrome_version():
 
 
 def get_url_to_download(version):
+
     if not version:
         raise ValueError("Unable to get url because version is empty")
+    config = configparser.ConfigParser()
+    config.read('config.ini')
     url_to_path_location = config['Github']['ChromeLatestReleaseUrl']+f"{
         '.'.join(version.split('.')[:3])}"
     response = requests.get(url_to_path_location)
@@ -67,9 +70,6 @@ def get_url_to_download(version):
             response.status_code}")
         raise requests.exceptions.RequestException(
             f"Unable to get version path from website: {response.status_code}")
-
-    config = configparser.ConfigParser()
-    config.read('config.ini')
     downloadUrl = config['Settings']['ChromeDownloadUrl']
     downloadFile = config['Settings']['ChromeDownloadFile']
     return downloadUrl+response.text+downloadFile
@@ -163,6 +163,8 @@ if __name__ == "__main__":
     except Exception as ex:
         Log().write_log("更新應用程式失敗!")
         Log().write_log(str(ex))
-
-    update_chrome_driver()
+    try:
+        update_chrome_driver()
+    except Exception as ex:
+        Log().write_log(str(ex))
     SeleniumChrome().load_data()
