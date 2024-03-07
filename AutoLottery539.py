@@ -11,6 +11,7 @@ from UpdateAutoLottery539 import UpdateAutoLottery539
 import configparser
 import tempfile
 import subprocess
+import time
 
 
 def update_chrome_driver():
@@ -124,10 +125,10 @@ def schedule_commands(temp_file_path, file_path):
     # 在延迟后执行命令
     subprocess.Popen(
         ["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 & Del", temp_file_path])
-
+    time.sleep(2)
     # 启动新版本程序
     subprocess.Popen(["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 &",
-                     os.path.join(file_path, "AutoLottery539.exe")])
+                      os.path.join(file_path, "AutoLottery539.exe")])
 
 
 if __name__ == "__main__":
