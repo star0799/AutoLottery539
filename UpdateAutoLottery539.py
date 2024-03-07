@@ -64,6 +64,7 @@ class UpdateAutoLottery539:
         os.remove(file_path)
 
     def move_and_replace_files(self):
+        Log().write_log(self.path)
         source_directory = os.path.join(os.path.dirname(__file__), "publish")
         destination_directory = os.path.dirname(__file__)
 
