@@ -127,7 +127,7 @@ def schedule_commands(temp_file_path, file_path):
 
     # 启动新版本程序
     subprocess.Popen(["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 &",
-                     os.path.join(file_path, "Lottery539.exe")])
+                     os.path.join(file_path, "AutoLottery539.exe")])
 
 
 if __name__ == "__main__":
@@ -156,7 +156,7 @@ if __name__ == "__main__":
             updater.move_and_replace_files()
 
             # 在一段延迟后执行命令
-            temp_exe_path = os.path.join(temp_dir, 'AutoLottery539_temp.exe')
+            temp_exe_path = os.path.join(temp_dir, 'AutoLottery539.exe')
             schedule_commands(temp_exe_path, filePath)
             Log().write_log("更新應用程式成功!")
 
