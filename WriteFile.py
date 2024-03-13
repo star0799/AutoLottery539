@@ -11,7 +11,7 @@ class WriteFile:
         self.file_name = "Lottery"
 
     def write_data(self, data: List[LotteryData]):
-        file_path = os.path.join(self.path, f"{self.file_name}.txt")
+        file_path = os.path.join(self.path, self.file_name + ".txt")
 
         existing_lines = []
         if os.path.exists(file_path):
@@ -27,8 +27,8 @@ class WriteFile:
     def format_data_file(self, data: List[LotteryData]) -> List[str]:
         result = []
         for d in data:
-            result.append(f"{d.Issue}:{d.LotteryDate}:{
-                          self.split_empty(d.Numbers)}\n")
+            result.append(d.Issue + ":" + d.LotteryDate + ":" +
+                          self.split_empty(d.Numbers) + "\n")
         return result
 
     def split_empty(self, numbers: str) -> str:
@@ -37,7 +37,7 @@ class WriteFile:
         return result
 
     def insert_lottery(self, data: LotteryData):
-        file_path = os.path.join(self.path, f"{self.file_name}.txt")
+        file_path = os.path.join(self.path, self.file_name + ".txt")
 
         existing_lines = []
         if os.path.exists(file_path):

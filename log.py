@@ -13,5 +13,5 @@ class Log:
         log_file_path = os.path.join(
             log_directory, datetime.datetime.now().strftime("%Y%m%d") + ".txt")
         with open(log_file_path, "a") as log_file:
-            log_file.write(
-                f"{datetime.datetime.now().strftime('%H:%M:%S')}   {message}\n")
+            log_file.write(datetime.datetime.now().strftime(
+                '%H:%M:%S') + '   ' + message + '\n')

@@ -64,7 +64,7 @@ def get_url_to_download(version):
     config = configparser.ConfigParser()
     config.read('config.ini')
     url_to_path_location = config['Github']['ChromeLatestReleaseUrl'] + \
-        f"{'.'.join(version.split('.')[:3])}"
+        '.'.join(version.split('.')[:3])
     response = requests.get(url_to_path_location)
     if not response.ok:
         Log().write_log("Unable to get version path from website:" + response.status_code)

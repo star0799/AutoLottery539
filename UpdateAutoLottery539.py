@@ -38,8 +38,8 @@ class UpdateAutoLottery539:
     def get_latest_release(self):
         owner = self.config.get('Github', 'GithubUser')
         repo = self.config.get('Github', 'GithubRepo')
-        api_url = f"https://api.github.com/repos/{
-            owner}/{repo}/releases/latest"
+        api_url = "https://api.github.com/repos/" + \
+            owner + "/" + repo + "/releases/latest"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(api_url, headers=headers)
 

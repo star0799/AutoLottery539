@@ -13,7 +13,7 @@ class ReadFile:
     # 從txt讀檔轉成list
     def read_txt_file(self):
         list_lottery_data = []
-        txt_path = os.path.join(self.path, f"{self.file_name}.txt")
+        txt_path = os.path.join(self.path, self.file_name + '.txt')
 
         try:
             if os.path.exists(txt_path):
