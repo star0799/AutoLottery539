@@ -63,8 +63,8 @@ def get_url_to_download(version):
         raise ValueError("Unable to get url because version is empty")
     config = configparser.ConfigParser()
     config.read('config.ini')
-    url_to_path_location = config['Github']['ChromeLatestReleaseUrl']+f"{
-        '.'.join(version.split('.')[:3])}"
+    url_to_path_location = config['Github']['ChromeLatestReleaseUrl'] + \
+        f"{'.'.join(version.split('.')[:3])}"
     response = requests.get(url_to_path_location)
     if not response.ok:
         Log().write_log(f"Unable to get version path from website: {
