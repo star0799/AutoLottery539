@@ -28,11 +28,11 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: AutoLottery539.exe
-        path: .
+        path: dist/AutoLottery539.exe
 
     - name: 複製檔案到發布目錄
       run: |
-        cp AutoLottery539.exe publish/
+        cp dist/AutoLottery539.exe publish/
         cp config.ini publish/
         cp AutoLottery539_version.txt publish/
 
