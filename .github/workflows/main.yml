@@ -15,6 +15,15 @@ jobs:
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
       with:
         path: .
+    
+    - name: 更新版本號
+      run: |
+        date_string=$(date +'%Y%m%d%H%M%S')
+        echo $date_string > AutoLottery539_version.txt
+
+    - name: 創建發布目錄
+      run: |
+        mkdir publish
 
     - uses: actions/upload-artifact@v2
       with:
