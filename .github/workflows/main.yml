@@ -34,17 +34,14 @@ jobs:
 
     - name: Package Application
       uses: JackMcKew/pyinstaller-action-windows@python3-10-pyinstaller-5-3
-      with:
-        path: src
 
     - uses: actions/upload-artifact@v2
       with:
         name: name-of-artifact
-        path: src/dist/windows
 
     - name: 複製檔案到發布目錄
       run: |
-        cp src/dist/windows/AutoLottery539.exe publish/
+        cp AutoLottery539.exe publish/
         cp config.ini publish/
         cp AutoLottery539_version.txt publish/
 
