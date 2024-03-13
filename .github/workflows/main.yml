@@ -32,7 +32,7 @@ jobs:
 
     - name: 複製檔案到發布目錄
       run: |
-        cp dist/AutoLottery539.exe publish/
+        cp dist/windows/AutoLottery539.exe publish/
         cp config.ini publish/
         cp AutoLottery539_version.txt publish/
 
