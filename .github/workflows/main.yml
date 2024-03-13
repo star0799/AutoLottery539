@@ -28,7 +28,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: AutoLottery539.exe
-        path: dist/AutoLottery539.exe
+        path: ./dist
 
     - name: 複製檔案到發布目錄
       run: |
