@@ -69,7 +69,7 @@ def get_url_to_download(version):
     if not response.ok:
         Log().write_log("Unable to get version path from website:" + response.status_code)
         raise requests.exceptions.RequestException(
-            f"Unable to get version path from website: {response.status_code}")
+            "Unable to get version path from website:" + response.status_code)
     downloadUrl = config['Settings']['ChromeDownloadUrl']
     downloadFile = config['Settings']['ChromeDownloadFile']
     return downloadUrl+response.text+downloadFile

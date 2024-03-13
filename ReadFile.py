@@ -24,6 +24,6 @@ class ReadFile:
                         list_lottery_data.append(
                             {"Issue": data[0], "LotteryDate": data[1], "Numbers": data[2]})
         except Exception as ex:
-            Log().write_log(f"read_txt_file 錯誤: {str(ex)}")
+            Log().write_log("read_txt_file 錯誤:"+str(ex))
 
         return list_lottery_data
