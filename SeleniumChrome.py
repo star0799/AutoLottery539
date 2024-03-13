@@ -99,8 +99,8 @@ class SeleniumChrome:
                         (By.XPATH, "/html/body/table[3]/tbody/tr"))
                 )
             self.lottery_data_list = []
-            max_issue_xpath = f"//td[1][text() > '{
-                self.client_max_issue}']/parent::tr"
+            max_issue_xpath = "//td[1][text() > '" + \
+                str(self.client_max_issue) + "']/parent::tr"
             lottery_rows = self.driver.find_elements(By.XPATH, max_issue_xpath)
             for row in lottery_rows:
                 columns = row.find_elements(By.TAG_NAME, "td")
@@ -111,7 +111,7 @@ class SeleniumChrome:
                 )
                 self.lottery_data_list.append(lottery_data)
         except Exception as ex:
-            self.log.write_log(f"Get data error: {str(ex)}")
+            self.log.write_log("Get data error:" + str(ex))
 
     def get_config_value(self, key):
         config = configparser.ConfigParser()
@@ -123,5 +123,5 @@ class SeleniumChrome:
             return os.environ.get(key) or config.get('Settings', key, fallback="")
         except Exception as ex:
             # 讀取配置時發生錯誤
-            print(f"Error reading configuration: {ex}")
+            print("Error reading configuration:" + ex)
             return ""
