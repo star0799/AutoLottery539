@@ -7,6 +7,11 @@ from log import Log
 import sys
 from ReadFile import ReadFile
 from SeleniumChrome import SeleniumChrome
+from UpdateAutoLottery539 import UpdateAutoLottery539
+import configparser
+import tempfile
+import subprocess
+import time
 
 
 def update_chrome_driver():
@@ -23,11 +28,11 @@ def update_chrome_driver():
             download_new_version_of_chrome(url_to_download, chrome_driver_path)
             extract_zip(chrome_driver_path)
             move_chrome_driver(chrome_driver_path)
-            Log().write_log("下載新版本Url:"+url_to_download+"完成")
+            Log().write_log("ChromeDriver下載新版本Url:"+url_to_download+"完成")
         except Exception as ex:
             Log().write_log("更新ChromeDriver失敗，原因:"+str(ex))
     else:
-        Log().write_log("無須更新")
+        Log().write_log("ChromeDriver無須更新")
     print("更新ChromeDriver結束")
     Log().write_log("更新ChromeDriver結束")
 
@@ -53,9 +58,12 @@ def get_web_chrome_version():
 
 
 def get_url_to_download(version):
+
     if not version:
         raise ValueError("Unable to get url because version is empty")
-    url_to_path_location = f"https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_{
+    config = configparser.ConfigParser()
+    config.read('config.ini')
+    url_to_path_location = config['Github']['ChromeLatestReleaseUrl']+f"{
         '.'.join(version.split('.')[:3])}"
     response = requests.get(url_to_path_location)
     if not response.ok:
@@ -63,8 +71,9 @@ def get_url_to_download(version):
             response.status_code}")
         raise requests.exceptions.RequestException(
             f"Unable to get version path from website: {response.status_code}")
-
-    return f"https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/{response.text}/win64/chromedriver-win64.zip"
+    downloadUrl = config['Settings']['ChromeDownloadUrl']
+    downloadFile = config['Settings']['ChromeDownloadFile']
+    return downloadUrl+response.text+downloadFile
 
 
 def kill_all_chromedriver_processes():
@@ -112,6 +121,51 @@ def move_chrome_driver(chrome_driver_path):
                                "chromedriver-win64"), ignore_errors=True)
 
 
+def schedule_commands(temp_file_path, file_path):
+    # 在延迟后执行命令
+    subprocess.Popen(
+        ["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 & Del", temp_file_path])
+    # 启动新版本程序
+    subprocess.Popen(["cmd.exe", "/C", "choice /C Y /N /D Y /T 1 &",
+                      os.path.join(file_path, "AutoLottery539.exe")])
+
+
 if __name__ == "__main__":
-    update_chrome_driver()
+    try:
+        Log().write_log("更新應用程式開始...")
+        filePath = os.getcwd()
+        # 要異動的檔案列表
+        moveFiles = ["AutoLottery539_version.txt",
+                     "AutoLottery539.exe", "config.ini"]
+        updater = UpdateAutoLottery539()
+        update_available, download_url = updater.is_update()
+        if update_available:
+            # 创建临时目录
+            temp_dir = tempfile.mkdtemp()
+
+            # 将原始目录中的指定檔案移动到临时目录
+            for file_to_move in moveFiles:
+                if os.path.isfile(file_to_move):
+                    temp_file_path = os.path.join(temp_dir, file_to_move)
+                    shutil.move(file_to_move, temp_file_path)
+
+            # 下载并更新文件
+            updater.download_file(download_url, '.')
+
+            # 移动并替换文件
+            updater.move_and_replace_files()
+
+            # 在一段延迟后执行命令
+            temp_exe_path = os.path.join(temp_dir, 'AutoLottery539.exe')
+            schedule_commands(temp_exe_path, filePath)
+            Log().write_log("更新應用程式成功!")
+            sys.exit()
+
+    except Exception as ex:
+        Log().write_log("更新應用程式失敗!")
+        Log().write_log(str(ex))
+    try:
+        update_chrome_driver()
+    except Exception as ex:
+        Log().write_log(str(ex))
     SeleniumChrome().load_data()
